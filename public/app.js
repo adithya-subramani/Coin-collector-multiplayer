@@ -36,7 +36,6 @@ const mapData1 = {
   },
 };
 
-// Options for Player Colors... these are in the same order as our sprite sheet
 const playerColors = ["blue", "red", "orange", "yellow", "green", "purple"];
 
 //Misc Helpers
@@ -183,6 +182,9 @@ function getRandomSafeSpot() {
       set(playerRef,players[playerId]);
       attemptGrabCoin(newX, newY);
     }
+    else {
+      (new Audio('/sounds/hit.wav')).play();
+    }
   }
 
   function initGame() {
@@ -282,6 +284,7 @@ function getRandomSafeSpot() {
       const {x,y} = snapshot.val();
       const keyToRemove = getKeyString(x,y);
       gameContainer.removeChild( coinElements[keyToRemove] );
+      (new Audio('/sounds/coin.wav')).play();
       delete coinElements[keyToRemove];
     })
 
